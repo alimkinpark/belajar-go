@@ -12,21 +12,34 @@ func main() {
 	n := 3
 	for n > 0 {
 		fmt.Println("while", n)
-		// TODO 1: turunkan n, kalau tidak loop-nya infinite (Ctrl+C untuk stop)
+		// 1: turunkan n, kalau tidak loop-nya infinite (Ctrl+C untuk stop)
+		n--
 	}
 
 	// bentuk 3: for range
 	buahly := []string{"go", "lagi", "asik"}
-	// ponytail: blank assign biar stub compile, hapus kalau TODO 2 sudah pakai var-nya
-	_ = buahly
 
-	// TODO 2: range buahly, print index dan nilainya
+	// 2: range buahly, print index dan nilainya
+	for i, v := range buahly {
+		fmt.Println(i, v)
+	}
 
 	// if dengan init statement
-	// TODO 3: tulis if yang cek len(buahly), deklarasi variabel di init statement-nya:
+	// 3: tulis if yang cek len(buahly), deklarasi variabel di init statement-nya:
 	//  if v := len(buahly); ...
+	if v := len(buahly); v > 0 {
+		fmt.Println("len(buahly) > 0", v)
+	}
 
 	// switch
-	// TODO 4: switch tanpa kondisi (switch { case ... }) — cek angka dari variabel,
+	// 4: switch tanpa kondisi (switch { case ... }) — cek angka dari variabel,
 	//  case pertama, kedua, default
+	switch {
+	case n == 0:
+		fmt.Println("n == 0")
+	case n > 0:
+		fmt.Println("n > 0")
+	default:
+		fmt.Println("n < 0")
+	}
 }
