@@ -66,6 +66,70 @@ harga := 15000.555
 fmt.Printf("Rp %.2f\n", harga)  // Rp 15000.56
 ```
 
+## Cek error: `errors.Is` vs `errors.As`
+
+### Implementasi lengkap: sentinel + custom error + wrap
+
+```go
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+// Sentinel error: paket-level, "nomor telepon" yang bisa dicek pemanggil
+var ErrNotFound = errors.New("data tidak ditemukan")
+
+// Custom error type: bawa data detail (field, dsb.)
+type ValidationError struct{ Field string }
+
+func (e *ValidationError) Error() string { return "validasi gagal di " + e.Field }
+
+func cari(id int) error {
+    if id == 1 {
+        return ErrNotFound                        // sentinel langsung
+    }
+    if id == 2 {
+        return &ValidationError{Field: "id"}      // custom type (pointer!)
+    }
+    if id == 3 {
+        return fmt.Errorf("gagal cari id %d: %w", id, ErrNotFound)  // wrap chain
+    }
+    return nil
+}
+
+func main() {
+    err := cari(3)
+
+    // errors.Is — "apakah ini ErrNotFound?" — JALAN walau dibungkus %w
+    if errors.Is(err, ErrNotFound) {
+        fmt.Println("not found")  // true untuk id 1 DAN id 3 (wrapped)
+    }
+
+    // errors.As — "apakah ini ValidationError? ambil detailnya"
+    var ve *ValidationError
+    if errors.As(err, &ve) {
+        fmt.Println("field:", ve.Field)  // ve terisi langsung, no assertion kedua
+    }
+    // errors.As(nil, ...) = false — aman untuk id 4 (err == nil)
+}
+```
+
+### Kapan pakai yang mana
+
+| Cek                    | Pakai          | Contoh                          |
+|------------------------|----------------|---------------------------------|
+| Ada error atau tidak   | `err != nil`   | selalu, cek pertama             |
+| Error sama dengan X?   | `errors.Is`    | `errors.Is(err, ErrNotFound)`   |
+| Error tipe T? ambil detail | `errors.As` | `errors.As(err, &ve)`          |
+
+### Aturan penting
+
+1. Return type dari constructor harus konsisten: `&ValidationError{}` ↔ `errors.As(err, &ve)` target `*ValidationError`
+2. `errors.Is/As` menembus wrap `%w` sebanyak apa pun — `fmt.Errorf("%v", ...)` PUTUS chain
+3. `var ve *ValidationError` di luar `if` — errors.As mengisi; deklarasi di dalam `if` pakai `:=` bikin bug shadowing `err` (lihat gotcha Fase 1)
+
 ### `%q` — debugging string terlihat karakter tersembunyi
 
 ```go
