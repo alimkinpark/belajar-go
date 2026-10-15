@@ -30,11 +30,36 @@ func cari(id int) error {
 }
 
 func main() {
-	// TODO 1: loop id 1-4, panggil cari(id), print error-nya
+	//  1: loop id 1-4, panggil cari(id), print error-nya
+	for id := 1; id <= 4; id++ {
+		err := cari(id)
+		if err != nil {
+			fmt.Println("id", id, "error:", err)
+		} else {
+			fmt.Println("id", id, "tidak ada error")
+		}
+	}
 
-	// TODO 2: pakai errors.Is untuk cek apakah error sama dengan ErrNotFound
+	//  2: pakai errors.Is untuk cek apakah error sama dengan ErrNotFound
 	//  (perhatikan: id 3 tetap cocok walau dibungkus %w)
+	for id := 1; id <= 4; id++ {
+		err := cari(id)
+		if errors.Is(err, ErrNotFound) {
+			fmt.Println("id", id, "error is ErrNotFound")
+		} else {
+			fmt.Println("id", id, "error is NOT ErrNotFound")
+		}
+	}
 
-	// TODO 3: pakai errors.As untuk ekstrak *ValidationError dari error id 2,
+	//  3: pakai errors.As untuk ekstrak *ValidationError dari error id 2,
 	//  print e.Field
+	for id := 1; id <= 4; id++ {
+		err := cari(id)
+		var ve *ValidationError
+		if errors.As(err, &ve) {
+			fmt.Println("id", id, "error is ValidationError, field:", ve.Field)
+		} else {
+			fmt.Println("id", id, "error is NOT ValidationError")
+		}
+	}
 }
