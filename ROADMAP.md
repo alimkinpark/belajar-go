@@ -29,7 +29,7 @@ Gaya nulis Go yang benar. Pembeda coder Go macet vs jalan.
 - [x] Methods & receiver (value vs pointer receiver)
 - [x] Interface: implicit, small interface, `io.Reader`/`io.Writer` pattern
 - [x] Composition over inheritance, embedding
-- [ ] Generics dasar: type parameter, constraint
+- [x] Generics dasar: type parameter, constraint
 - [ ] Effective Go + Go idioms: error wrapping, sentinel error, fmt.Errorf `%w`
 
 Latihan wajib:
