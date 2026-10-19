@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"strings"
 )
 
@@ -15,25 +16,51 @@ type Robot struct {
 	Name string
 }
 
-// TODO 1: method Speak() string untuk Dog — balikin "guk"
-// TODO 2: method Speak() string untuk Robot — balikin nama + ": bip"
+// 1: method Speak() string untuk Dog — balikin "guk"
+func (d Dog) Speak() string {
+	return "guk"
+}
 
-// TODO 3: fungsi yang terima []Speaker, loop & print tiap Speak()
-//  (perhatikan: tahu Dog maupun Robot tanpa import masing-masing)
+// 2: method Speak() string untuk Robot — balikin nama + ": bip"
+func (r Robot) Speak() string {
+	return fmt.Sprintf("%s: bip", r.Name)
+}
+
+//	 3: fungsi yang terima []Speaker, loop & print tiap Speak()
+//
+//		(perhatikan: tahu Dog maupun Robot tanpa import masing-masing)
+func SpeakAll(speakers []Speaker) {
+	for _, speaker := range speakers {
+		fmt.Println(speaker.Speak())
+	}
+}
 
 func main() {
 	zoo := []Speaker{}
 	// TODO 4: isi zoo dengan Dog{} dan Robot{Name: "R2"}, panggil fungsi TODO 3
+	zoo = append(zoo, Dog{}, Robot{Name: "R2"})
+	SpeakAll(zoo)
 
 	// Pattern io.Reader — interface paling umum di Go stdlib
-	// TODO 5: buat io.Reader dari string dengan strings.NewReader
+	//  5: buat io.Reader dari string dengan strings.NewReader
 	//  lalu io.ReadAll, print hasilnya (ini cara baca apapun di Go:
 	//  file, network, HTTP body — semua lewat io.Reader)
-	r := strings.NewReader("")
-	_ = r
-	_ = zoo
-	_ = fmt.Sprint
-	
-	// TODO 5 petunjuk: fmt.Sprint di atas hanya placeholder biar import fmt tidak error.
-	//  Hapus baris `_ = fmt.Sprint` setelah TODO 1/2 pakai fmt.Println.
+	r := strings.NewReader("apa yang kamu dengar?")
+	data, err := io.ReadAll(r)
+
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Printf("data: %s\n", data)
+	}
+
+	// belajar tambahan assertion Speaker ke Dog, Robot, dan type lain
+	var s Speaker = Dog{}
+	// s.Speak() // ini aman, karena Dog punya Speak()
+	v, ok := s.(Robot) // assertion ke Robot, tapi s adalah Dog
+	if ok {
+		fmt.Println("s adalah Robot, Speak():", v.Speak())
+	} else {
+		fmt.Println("s bukan Robot, tapi:", s.Speak())
+	}
 }
