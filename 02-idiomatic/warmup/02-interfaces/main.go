@@ -37,7 +37,7 @@ func SpeakAll(speakers []Speaker) {
 
 func main() {
 	zoo := []Speaker{}
-	// TODO 4: isi zoo dengan Dog{} dan Robot{Name: "R2"}, panggil fungsi TODO 3
+	//  4: isi zoo dengan Dog{} dan Robot{Name: "R2"}, panggil fungsi TODO 3
 	zoo = append(zoo, Dog{}, Robot{Name: "R2"})
 	SpeakAll(zoo)
 
