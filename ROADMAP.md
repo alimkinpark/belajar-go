@@ -12,15 +12,15 @@ Cara pakai: tiap fase punya folder latihan. Isi kode di situ. Centang `- [x]` se
 
 Ulang cepat, sudah bisa bahasa lain. Fokus kebede Go dari bahasa lain.
 
-- [ ] Variabel, zero value, `:=` vs `var`, konstanta
-- [ ] Control flow: `for` (satu-satunya loop), `if` init statement, `switch`
-- [ ] Composite: array vs slice, map, struct, `append`, `make`, `len`/`cap`
-- [ ] Pointer: kapan perlu, kapan tidak, receiver value vs pointer
-- [ ] Error handling: `error`, `errors.Is`/`errors.As`, custom error type
-- [ ] Fungsi: multiple return, named return, defer, closure
+- [x] Variabel, zero value, `:=` vs `var`, konstanta
+- [x] Control flow: `for` (satu-satunya loop), `if` init statement, `switch`
+- [x] Composite: array vs slice, map, struct, `append`, `make`, `len`/`cap`
+- [x] Pointer: kapan perlu, kapan tidak, receiver value vs pointer
+- [x] Error handling: `error`, `errors.Is`/`errors.As`, custom error type
+- [x] Fungsi: multiple return, named return, defer, closure
 
 Latihan wajib:
-- [ ] CLI word counter: baca file/stdin, hitung jumlah kata & baris (mirip `wc`)
+- [x] CLI word counter: baca file/stdin, hitung jumlah kata & baris (mirip `wc`)
 
 ## Fase 2 - Idiomatic Go (`02-idiomatic/`)
 
