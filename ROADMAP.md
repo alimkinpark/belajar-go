@@ -8,7 +8,7 @@ Cara pakai: tiap fase punya folder latihan. Isi kode di situ. Centang `- [x]` se
 
 ---
 
-## Fase 1 - Refresher (`01-refresher/`)
+## Fase 1 - Refresher (`01-refresher/`) ✅
 
 Ulang cepat, sudah bisa bahasa lain. Fokus kebede Go dari bahasa lain.
 
@@ -26,7 +26,7 @@ Latihan wajib:
 
 Gaya nulis Go yang benar. Pembeda coder Go macet vs jalan.
 
-- [ ] Methods & receiver (value vs pointer receiver)
+- [x] Methods & receiver (value vs pointer receiver)
 - [ ] Interface: implicit, small interface, `io.Reader`/`io.Writer` pattern
 - [ ] Composition over inheritance, embedding
 - [ ] Generics dasar: type parameter, constraint
