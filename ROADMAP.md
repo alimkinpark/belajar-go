@@ -27,7 +27,7 @@ Latihan wajib:
 Gaya nulis Go yang benar. Pembeda coder Go macet vs jalan.
 
 - [x] Methods & receiver (value vs pointer receiver)
-- [ ] Interface: implicit, small interface, `io.Reader`/`io.Writer` pattern
+- [x] Interface: implicit, small interface, `io.Reader`/`io.Writer` pattern
 - [ ] Composition over inheritance, embedding
 - [ ] Generics dasar: type parameter, constraint
 - [ ] Effective Go + Go idioms: error wrapping, sentinel error, fmt.Errorf `%w`
